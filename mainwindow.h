@@ -1,37 +1,104 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QMap>
-#include <QtCharts>
+#include <QSplitter>
+#include <vector>
+#include <QPixmap>
+#include "leftdownwidget.h"
+#include "lefttopwidget.h"
+#include "rightdownwidget.h"
+#include "righttopwidget.h"
 
-//宏定义使用QChart命名空间
-QT_CHARTS_USE_NAMESPACE
-
-namespace Ui {
-class MainWindow;
-}
-
-//主窗口类
 class MainWindow : public QMainWindow {
     Q_OBJECT
+
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void createChart(); //创建图表的基本组件
-    void prepareData(); //更新数据
-    void updataFromChart(); //从图表更新到界面：读取图表的属性并更新到界面
+    void parametersConfirm();
+
 private:
-    Ui::MainWindow * ui;
 
-    QMap<long long, double> sourcedata; //主成图源数据：时间戳+对应的距离数据
-    long long begintime, endtime; //时间显示区间[begintime, endtime]
-    double begindis, enddis; //距离显示区间[begindis, enddis]
-    bool beginDraw; //是否开始绘图或者更新绘图
+    QPixmap pixmap;
 
-    QLineSeries * curseries; //当前操作的序列
-    QValueAxis * curaxis; //当前操作的坐标轴
+    leftTopWidget *leftTop;
+    leftDownWidget *leftDown;
+    rightTopWidget *rightTop;
+    rightDownWidget *rightDown;
 
+    QSplitter *splitterMain;
+    QSplitter *splitterRight;
+    QSplitter *splitterLeft;
+
+    QMenu *fileMenu;
+    QMenu *setMenu;
+    QMenu *measureMessageMenu;
+    QMenu *measureFunctionMenu;
+    QMenu *viewActionMenu;
+    QMenu *relateActionMenu;
+
+    QAction *newBuiltAction;
+    QAction *openAction;
+    QAction *addaction;
+    QAction *saveAction;
+    QAction *repoartAction;
+    QAction *exitAction;
+
+    QAction *parametersAction;
+    QAction *conditionAction;
+    QAction *measuresetAction;
+
+    //    QAction *recieveAction;
+    QAction *pickAction;
+    //    QAction *viewAction;
+    QAction *updateAction;
+
+    QAction *bladeAngleAction;
+    QAction *bladeTwistAction;
+    QAction *bladePitchAction;
+    QAction *towerVibrationAction;
+    QAction *fanClearanceAction;
+    QAction *bladeDeflectionAction;
+    QAction *yawDetectionAction;
+    QAction *bladetopbeforeAction;
+    QAction *bladetopbehindAction;
+    QAction *bladerootbeforeAction;
+    QAction *bladerootbehindAction;
+    QAction *enlargeAction;
+    QAction *shrinkAction;
+
+    QAction *softwareVersionAction;
+    QAction *technicalSupportAction;
+
+private slots:
+    void newBuilt();
+    void open();
+    void add();
+    void save();
+    void repoart();
+    void parameters();  //风机信息
+    void condition();   //条件信息
+    void measureset();  //数据信息
+    //    void recieve();
+    void pick();
+    //    void view();
+    void update();
+    void bladeAngle();
+    void bladeTwist();
+    void bladePitch();
+    void towerVibration();
+    void fanClearance();
+    void bladeDeflection();
+    void yawDetection();
+    void enlarge();
+    void shrink();
+    void bladetopbefore();
+    void bladetopbehind();
+    void bladerootbefore();
+    void bladerootbehind();
+    void softwareVersion();
+    void technicalSupport();
 };
 
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H
